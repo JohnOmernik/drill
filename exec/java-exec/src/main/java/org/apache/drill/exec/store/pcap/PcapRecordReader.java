@@ -393,15 +393,14 @@ public class PcapRecordReader extends AbstractRecordReader {
         .setSafe(count, value, 0, value.remaining());
   }
 
-//
-//  private void setStringColumnValue(final String data, final ProjectedColumnInfo pci, final int count) {
-//    if (data == null) {
-//      ((NullableVarCharVector.Mutator) pci.vv.getMutator())
-//          .setNull(count);
-//    } else {
-//      ByteBuffer value = ByteBuffer.wrap(data.getBytes(UTF_8));
-//      ((NullableVarCharVector.Mutator) pci.vv.getMutator())
-//          .setSafe(count, value, 0, value.remaining());
-//    }
-// }
+  private void setStringColumnValue(final String data, final ProjectedColumnInfo pci, final int count) {
+    if (data == null) {
+      ((NullableVarCharVector.Mutator) pci.vv.getMutator())
+          .setNull(count);
+    } else {
+      ByteBuffer value = ByteBuffer.wrap(data.getBytes(UTF_8));
+      ((NullableVarCharVector.Mutator) pci.vv.getMutator())
+          .setSafe(count, value, 0, value.remaining());
+    }
+  }
 }
