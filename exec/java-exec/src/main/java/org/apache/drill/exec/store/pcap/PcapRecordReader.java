@@ -388,7 +388,7 @@ public class PcapRecordReader extends AbstractRecordReader {
         .setSafe(count, data);
   }
   private void setVarBinaryColumnValue(final byte[] data, final ProjectedColumnInfo pci, final int count) {
-    ByteBuffer value = ByteBuffer.wrap(data)
+    ByteBuffer value = ByteBuffer.wrap(data);
     ((NullableVarBinaryVector.Mutator) pci.vv.getMutator())
         .setSafe(count, value, 0, value.remaining());
   }
