@@ -356,12 +356,12 @@ public class PcapRecordReader extends AbstractRecordReader {
           setIntegerColumnValue(packet.getPacketLength(), pci, count);
           break;
         case "data":
-          if (packet.getData() != null) {
+//          if (packet.getData() != null) {
             setVarBinaryColumnValue(packet.getData(), pci, count);
  //           setStringColumnValue(parseBytesToASCII(packet.getData()), pci, count);
-          } else {
-            setStringColumnValue(null, pci, count);
-          }
+  //        } else {
+   //         setVarBinaryColumnValue(null, pci, count);
+    //      }
           break;
       }
     }
@@ -389,7 +389,7 @@ public class PcapRecordReader extends AbstractRecordReader {
   }
   private void setVarBinaryColumnValue(final byte[] data, final ProjectedColumnInfo pci, final int count) {
     ((NullableVarBinaryVector.Mutator) pci.vv.getMutator())
-        .setSafe(count, data);
+        .setSafe(count, data, 0, data.length());
   }
 
  
