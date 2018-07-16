@@ -41,6 +41,7 @@ import org.apache.drill.exec.vector.NullableBigIntVector;
 import org.apache.drill.exec.vector.NullableIntVector;
 import org.apache.drill.exec.vector.NullableTimeStampVector;
 import org.apache.drill.exec.vector.NullableVarCharVector;
+import org.apache.drill.exec.vector.NullableVarBinaryVector;
 import org.apache.drill.exec.vector.ValueVector;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FileSystem;
@@ -356,9 +357,10 @@ public class PcapRecordReader extends AbstractRecordReader {
           break;
         case "data":
           if (packet.getData() != null) {
-            setStringColumnValue(parseBytesToASCII(packet.getData()), pci, count);
+            setVarBinaryColumnValue(packet.getData(), pci, count);
+ //           setStringColumnValue(parseBytesToASCII(packet.getData()), pci, count);
           } else {
-            setStringColumnValue("[]", pci, count);
+            setStringColumnValue(null, pci, count);
           }
           break;
       }
@@ -385,7 +387,12 @@ public class PcapRecordReader extends AbstractRecordReader {
     ((NullableTimeStampVector.Mutator) pci.vv.getMutator())
         .setSafe(count, data);
   }
+  private void setVarBinaryColumnValue(final byte[] data, final ProjectedColumnInfo pci, final int count) {
+    ((NullableVarBinaryVector.Mutator) pci.vv.getMutator())
+        .setSafe(count, data);
+  }
 
+ 
   private void setStringColumnValue(final String data, final ProjectedColumnInfo pci, final int count) {
     if (data == null) {
       ((NullableVarCharVector.Mutator) pci.vv.getMutator())
