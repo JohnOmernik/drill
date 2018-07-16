@@ -57,7 +57,7 @@ public class Schema {
     columns.add(new ColumnDto("tcp_flags_fin", PcapTypes.INTEGER ));
     columns.add(new ColumnDto("tcp_parsed_flags", PcapTypes.STRING));
     columns.add(new ColumnDto("packet_length", PcapTypes.INTEGER));
-    columns.add(new ColumnDto("data", PcapTypes.STRING));
+    columns.add(new ColumnDto("data", PcapTypes.BINARY));
   }
 
   /**

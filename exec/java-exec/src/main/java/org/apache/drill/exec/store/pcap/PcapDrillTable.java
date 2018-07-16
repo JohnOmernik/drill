@@ -60,6 +60,8 @@ public class PcapDrillTable extends DrillTable {
         return typeFactory.createSqlType(SqlTypeName.VARCHAR);
       case TIMESTAMP:
         return typeFactory.createSqlType(SqlTypeName.TIMESTAMP);
+      case BINARY:
+        return typeFactory.createSqlType(SqlTypeName.VARBINARY);
       default:
         throw new UnsupportedOperationException("Unsupported type.");
     }
