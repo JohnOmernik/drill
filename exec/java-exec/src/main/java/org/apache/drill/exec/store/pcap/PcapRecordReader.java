@@ -392,7 +392,7 @@ public class PcapRecordReader extends AbstractRecordReader {
   private void setVarBinaryColumnValue(final byte[] data, final ProjectedColumnInfo pci, final int count) {
     if (data == null) {
       // using .setNull got me an NPE so I am setting the data to [] like Ted did.
-      ByteBuffer value = ByteBuffer.wrap("[]");
+      ByteBuffer value = ByteBuffer.wrap("[]".getBytes());
       ((NullableVarBinaryVector.Mutator) pci.vv.getMutator())
         .setSafe(count, value, 0, value.remaining());
       //((NullableVarBinaryVector.Mutator) pci.vv.getMutator())
